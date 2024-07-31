@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: stg_ecommerce__products
+    description: "Products in the inventory"
+    columns:
+      - name: product_id
+        description: "Identifier"
+        tests:
+          - not_null
+          - unique
+
+      - name: cost
+        description: "Cost price of the product"
+        tests:
+          - not_null
+
+      - name: retail_price
+        description: "Price to end users"
+        tests:
+          - not_null
+
+      - name: department
+        description: "Internal department the product is assigned to"
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - "Men"
+                - "Women"
+
+      - name: brand
+        description: "Brand name of the product producer"

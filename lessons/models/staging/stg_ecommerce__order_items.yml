@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: stg_ecommerce__order_items
+    description: "Line items of orders"
+    columns:
+      - name: order_item_id
+        description: "Identifier"
+        tests:
+          - not_null
+          - unique
+
+      - name: order_id
+        description: "The order which the line item is part of"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_ecommerce_orders')
+              field: order_id
+
+      - name: user_id
+        description: "The user requesting the item"
+        tests:
+          - not_null
+
+      - name: product_id
+        description: "The product referenced by the line item"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_ecommerce_products')
+              field: product_id
+
+      - name: item_sale_price
+        description: "The cost of the item to the end user"
+        tests:
+          - not_null
